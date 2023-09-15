@@ -5,7 +5,9 @@ public class Tabuleiro {
   private int colunas;
   private Peca[][] pecas;
 
-  private static final String posicaoInvalida = "Posição informada não existe no tabuleiro";
+  private static void posicaoInvalida() {
+    throw new TabuleiroException("Posição informada não existe no tabuleiro");
+  }
 
   public Tabuleiro(int linhas, int colunas) {
     if (linhas < 1 || colunas < 1) throw new TabuleiroException(
@@ -25,12 +27,12 @@ public class Tabuleiro {
   }
 
   public Peca peca(int linha, int coluna) {
-    if (!posicaoExiste(linha, coluna)) throw new TabuleiroException(posicaoInvalida);
+    if (!posicaoExiste(linha, coluna)) posicaoInvalida();
     return pecas[linha][coluna];
   }
 
   public Peca peca(Posicao posicao) {
-    if (!posicaoExiste(posicao)) throw new TabuleiroException(posicaoInvalida);
+    if (!posicaoExiste(posicao)) posicaoInvalida();
     return pecas[posicao.getLinha()][posicao.getColuna()];
   }
 
@@ -51,7 +53,7 @@ public class Tabuleiro {
   }
 
   public boolean haUmaPeca(Posicao posicao) {
-    if (!posicaoExiste(posicao)) throw new TabuleiroException(posicaoInvalida);
+    if (!posicaoExiste(posicao)) posicaoInvalida();
     return peca(posicao) != null;
   }
 }
