@@ -41,10 +41,12 @@ public class PartidaDeXadrez {
 
   private void validarPosicaoDeOrigem(Posicao origem) {
     if (!tabuleiro.haUmaPeca(origem)) throw new XadrezException(
-      "Não existe uma peça na posição de origem selecionada"
+      "Não há peça na posição de origem selecionada"
     );
+    if (!tabuleiro.peca(origem).haMovimentosPossiveis()) {
+      throw new XadrezException("Não existem movimentos possíveis para a peça selecionada");
+    }
   }
-
 
   private void posicionarNovaPeca(char coluna, int linha, PecaDeXadrez peca) {
     tabuleiro.posicionarPeca(peca, new PosicaoXadrez(coluna, linha).posicaoMatriz());
