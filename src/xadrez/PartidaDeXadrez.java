@@ -80,7 +80,7 @@ public class PartidaDeXadrez {
       throw new XadrezException("Você não pode se colocar em check");
     }
 
-    PecaDeXadrez pecaMovida = (PecaDeXadrez) tabuleiro.peca(origem);
+    PecaDeXadrez pecaMovida = (PecaDeXadrez) tabuleiro.peca(destino);
 
     check = testarCheck(oponente(jogadorAtual)) ? true : false;
 
@@ -130,6 +130,21 @@ public class PartidaDeXadrez {
       torre.aumentarMovimentos();
     }
 
+    // movimento especial En Passant
+    if (peca instanceof Peao) {
+      if (origem.getColuna() != destino.getColuna() && pecaCapturada == null) {
+        Posicao posicaoDoPeao;
+        if (peca.getCor() == Cor.BRANCO) {
+          posicaoDoPeao = new Posicao(destino.getLinha() + 1, destino.getColuna());
+        } else {
+          posicaoDoPeao = new Posicao(destino.getLinha() - 1, destino.getColuna());
+        }
+        pecaCapturada = tabuleiro.removerPeca(posicaoDoPeao);
+        pecasCapturadas.add(pecaCapturada);
+        pecasNoTabuleiro.remove(pecaCapturada);
+      }
+    }
+
     return pecaCapturada;
   }
 
@@ -160,6 +175,20 @@ public class PartidaDeXadrez {
       PecaDeXadrez torre = (PecaDeXadrez) tabuleiro.removerPeca(destinoTorre);
       tabuleiro.posicionarPeca(torre, origemTorre);
       torre.diminuirMovimentos();
+    }
+
+    // desfazer movimento especial En Passant
+    if (peca instanceof Peao) {
+      if (origem.getColuna() != destino.getColuna() && pecaCapturada == riscoEnPassant) {
+        PecaDeXadrez peao = (PecaDeXadrez) tabuleiro.removerPeca(destino);
+        Posicao posicaoDoPeao;
+        if (peca.getCor() == Cor.BRANCO) {
+          posicaoDoPeao = new Posicao(3, destino.getColuna());
+        } else {
+          posicaoDoPeao = new Posicao(4, destino.getColuna());
+        }
+        tabuleiro.posicionarPeca(peao, posicaoDoPeao);
+      }
     }
   }
 
