@@ -56,7 +56,6 @@ public class UI {
 
     if (!partidaDeXadrez.getCheckMate()) {
       System.out.println("Aguardando jogador: " + partidaDeXadrez.getJogadorAtual());
-      System.out.println(partidaDeXadrez.getJogadorAtual());
       if (partidaDeXadrez.getCheck()) {
         System.out.println("Usuário em Xeque!");
       }
