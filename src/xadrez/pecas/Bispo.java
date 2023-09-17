@@ -5,8 +5,8 @@ import tabuleiro.Tabuleiro;
 import xadrez.Cor;
 import xadrez.PecaDeXadrez;
 
-public class Torre extends PecaDeXadrez {
-  public Torre(Tabuleiro tabuleiro, Cor cor) {
+public class Bispo extends PecaDeXadrez {
+  public Bispo(Tabuleiro tabuleiro, Cor cor) {
     super(tabuleiro, cor);
   }
 
@@ -17,41 +17,41 @@ public class Torre extends PecaDeXadrez {
 
     Posicao p = new Posicao(0, 0);
 
-    // verificar acima da peça
-    p.setLinhaColuna(posicao.getLinha() - 1, posicao.getColuna());
+    // verificar cima esquerda
+    p.setLinhaColuna(posicao.getLinha() - 1, posicao.getColuna() - 1);
     while (tab.posicaoExiste(p) && !tab.haUmaPeca(p)) {
       mat[p.getLinha()][p.getColuna()] = true;
-      p.setLinha(p.getLinha() - 1);
+      p.setLinhaColuna(p.getLinha() - 1, p.getColuna() - 1);
     }
     if (tab.posicaoExiste(p) && eUmaPecaDoOponente(p)) {
       mat[p.getLinha()][p.getColuna()] = true;
     }
 
-    // verificar à esquerda da peça
-    p.setLinhaColuna(posicao.getLinha(), posicao.getColuna() - 1);
+    // verificar cima direita
+    p.setLinhaColuna(posicao.getLinha() - 1, posicao.getColuna() + 1);
     while (tab.posicaoExiste(p) && !tab.haUmaPeca(p)) {
       mat[p.getLinha()][p.getColuna()] = true;
-      p.setColuna(p.getColuna() - 1);
+      p.setLinhaColuna(p.getLinha() - 1, p.getColuna() + 1);
     }
     if (tab.posicaoExiste(p) && eUmaPecaDoOponente(p)) {
       mat[p.getLinha()][p.getColuna()] = true;
     }
 
-    // verificar à direita da peça
-    p.setLinhaColuna(posicao.getLinha(), posicao.getColuna() + 1);
+    // verificar baixo direita
+    p.setLinhaColuna(posicao.getLinha() + 1, posicao.getColuna() + 1);
     while (tab.posicaoExiste(p) && !tab.haUmaPeca(p)) {
       mat[p.getLinha()][p.getColuna()] = true;
-      p.setColuna(p.getColuna() + 1);
+      p.setLinhaColuna(p.getLinha() + 1, p.getColuna() + 1);
     }
     if (tab.posicaoExiste(p) && eUmaPecaDoOponente(p)) {
       mat[p.getLinha()][p.getColuna()] = true;
     }
 
-    // verificar abaixo da peça
-    p.setLinhaColuna(posicao.getLinha() + 1, posicao.getColuna());
+    // verificar baixo esquerda
+    p.setLinhaColuna(posicao.getLinha() + 1, posicao.getColuna() - 1);
     while (tab.posicaoExiste(p) && !tab.haUmaPeca(p)) {
       mat[p.getLinha()][p.getColuna()] = true;
-      p.setLinha(p.getLinha() + 1);
+      p.setLinhaColuna(p.getLinha() + 1, p.getColuna() - 1);
     }
     if (tab.posicaoExiste(p) && eUmaPecaDoOponente(p)) {
       mat[p.getLinha()][p.getColuna()] = true;
@@ -62,6 +62,6 @@ public class Torre extends PecaDeXadrez {
 
   @Override
   public String toString() {
-    return "T";
+    return "B";
   }
 }

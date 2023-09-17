@@ -5,8 +5,8 @@ import tabuleiro.Tabuleiro;
 import xadrez.Cor;
 import xadrez.PecaDeXadrez;
 
-public class Rei extends PecaDeXadrez {
-  public Rei(Tabuleiro tabuleiro, Cor cor) {
+public class Cavalo extends PecaDeXadrez {
+  public Cavalo(Tabuleiro tabuleiro, Cor cor) {
     super(tabuleiro, cor);
   }
 
@@ -23,43 +23,42 @@ public class Rei extends PecaDeXadrez {
 
     Posicao p = new Posicao(0, 0);
 
-    // cima
-    p.setLinhaColuna(posicao.getLinha() - 1, posicao.getColuna());
+    p.setLinhaColuna(posicao.getLinha() - 1, posicao.getColuna() - 2);
     if (tab.posicaoExiste(p) && podeMover(p)) {
       mat[p.getLinha()][p.getColuna()] = true;
     }
-    // baixo
-    p.setLinhaColuna(posicao.getLinha() + 1, posicao.getColuna());
+
+    p.setLinhaColuna(posicao.getLinha() - 2, posicao.getColuna() - 1);
     if (tab.posicaoExiste(p) && podeMover(p)) {
       mat[p.getLinha()][p.getColuna()] = true;
     }
-    // esquerda
-    p.setLinhaColuna(posicao.getLinha(), posicao.getColuna() - 1);
+
+    p.setLinhaColuna(posicao.getLinha() - 2, posicao.getColuna() + 1);
     if (tab.posicaoExiste(p) && podeMover(p)) {
       mat[p.getLinha()][p.getColuna()] = true;
     }
-    // direita
-    p.setLinhaColuna(posicao.getLinha(), posicao.getColuna() + 1);
+
+    p.setLinhaColuna(posicao.getLinha() - 1, posicao.getColuna() + 2);
     if (tab.posicaoExiste(p) && podeMover(p)) {
       mat[p.getLinha()][p.getColuna()] = true;
     }
-    // cima esquerda
-    p.setLinhaColuna(posicao.getLinha() - 1, posicao.getColuna() - 1);
+
+    p.setLinhaColuna(posicao.getLinha() + 1, posicao.getColuna() + 2);
     if (tab.posicaoExiste(p) && podeMover(p)) {
       mat[p.getLinha()][p.getColuna()] = true;
     }
-    // baixo direita
-    p.setLinhaColuna(posicao.getLinha() + 1, posicao.getColuna() + 1);
+
+    p.setLinhaColuna(posicao.getLinha() + 2, posicao.getColuna() + 1);
     if (tab.posicaoExiste(p) && podeMover(p)) {
       mat[p.getLinha()][p.getColuna()] = true;
     }
-    // baixo esquerda
-    p.setLinhaColuna(posicao.getLinha() + 1, posicao.getColuna() - 1);
+
+    p.setLinhaColuna(posicao.getLinha() + 2, posicao.getColuna() - 1);
     if (tab.posicaoExiste(p) && podeMover(p)) {
       mat[p.getLinha()][p.getColuna()] = true;
     }
-    // cima direita
-    p.setLinhaColuna(posicao.getLinha() - 1, posicao.getColuna() + 1);
+
+    p.setLinhaColuna(posicao.getLinha() + 1, posicao.getColuna() - 2);
     if (tab.posicaoExiste(p) && podeMover(p)) {
       mat[p.getLinha()][p.getColuna()] = true;
     }
@@ -69,6 +68,6 @@ public class Rei extends PecaDeXadrez {
 
   @Override
   public String toString() {
-    return "R";
+    return "C";
   }
 }
