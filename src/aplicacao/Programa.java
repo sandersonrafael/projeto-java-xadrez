@@ -16,7 +16,7 @@ public class Programa {
     PartidaDeXadrez partidaDeXadrez = new PartidaDeXadrez();
     List<PecaDeXadrez> pecasCapturadas = new ArrayList<>();
 
-    while (true) {
+    while (!partidaDeXadrez.getCheckMate()) {
       try {
         UI.limparTela();
         UI.exibirJogo(partidaDeXadrez, pecasCapturadas);
@@ -44,5 +44,7 @@ public class Programa {
         sc.nextLine();
       }
     }
+    UI.limparTela();
+    UI.exibirJogo(partidaDeXadrez, pecasCapturadas);
   }
 }
