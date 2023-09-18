@@ -36,6 +36,17 @@ public class Programa {
         PecaDeXadrez pecaCapturada = partidaDeXadrez.realizarMovimentoDeXadrez(origem, destino);
         if (pecaCapturada != null) pecasCapturadas.add(pecaCapturada);
 
+        if (partidaDeXadrez.getPromovida() != null) {
+          System.out.print("Informe uma peça para a promoção (B|C|r|T): ");
+          String tipo = sc.nextLine();
+          while (!tipo.equals("B") && !tipo.equals("C") && !tipo.equals("r") && !tipo.equals("T")) {
+            UI.limparTela();
+            UI.exibirJogo(partidaDeXadrez, pecasCapturadas);
+            System.out.print("Peça informada é inválida. Informe uma peça válida (B|C|r|T): ");
+            tipo = sc.nextLine();
+          }
+          partidaDeXadrez.substituirPecaPromovida(tipo);
+        }
       } catch (XadrezException e) {
         System.out.println(e.getMessage());
         sc.nextLine();
